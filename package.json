@@ -1,0 +1,27 @@
+{
+  "name": "taskverse",
+  "version": "1.0.0",
+  "description": "A stylized task manager for large projects.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/universalflux/taskverse.git"
+  },
+  "author": "reyesr3 + universalflux",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/universalflux/taskverse/issues"
+  },
+  "homepage": "https://github.com/universalflux/taskverse#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.7",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.5",
+    "socket.io": "^1.5.1"
+  }
+}
