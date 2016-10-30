@@ -1,0 +1,60 @@
+<html ng-app = "taskverse">
+  <link rel = "stylesheet" href = "assets/css/materialize.css">
+  <link rel = "stylesheet" href = "assets/css/hand_coded.css">
+  <script src = "assets/javascript/angular.min.js"></script>
+  <script src = "assets/javascript/angular-route.min.js"></script>
+  <script src = "//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-cookies.js"></script>
+  <script src = "assets/javascript/jquery.js"></script>
+  <script src = "assets/javascript/materialize.js"></script>
+  <script src = "assets/javascript/hand_coded.js"></script>
+  <body  ng-controller = "UsersController as user" class = "grey lighten-3">
+    <div class = "login-reg container center">
+      <div ng-show = "user.show">
+        <h3 class = "purple-text text-lighten-1"> Login to TaskVerse </h3>
+        <div class = "red darken-2 white-text" ng-if = "user.error"> {{ user.error }} </div>
+        <input class = "input-custom" type = "text" placeholder = "username" ng-model = "user.posUser.posUserName">
+        <input class = "input-custom" type = "password" placeholder = "password" ng-model = "user.posUser.posPassword">
+        <div class = "row center">
+        <a ng-click = "user.loginUser(user.posUser)" class = "btn waves-effect waves-blue purple purple-lighten-1"> Login </a>
+        <a ng-click = "user.switchToReg()" class = "col s12 create-link right purple-text text-lighten-1"> Don't have an account? </a>
+        <a ng-click = "user.tokenLogin()" class = "btn white-text"> TokenTest </a>
+        </div>
+      </div>
+    </div>
+    <div class = "create-reg container center">
+      <div ng-show = "user.regHide">
+        <h3 class = "purple-text text-lighten-1"> Create a TaskVerse Account </h3>
+        <div class = "red darken-2 white-text" ng-if = "user.error"> {{ user.error }} </div>
+        <div class = "red darken-2 white-text" ng-if = "user.noMatch"> {{ user.noMatch.error }}</div>
+        <input class = "input-custom" type = "text" placeholder = "firstname" ng-model = "user.newUser.firstName">
+        <input class = "input-custom" type = "text" placeholder = "lastname" ng-model = "user.newUser.lastName">
+        <input class = "input-custom" type = "text" placeholder = "email" ng-model = "user.newUser.email">
+        <input class = "input-custom" type = "text" placeholder = "username" ng-model = "user.newUser.userName">
+        <input class = "input-custom" type = "password" placeholder = "password" ng-model = "user.newUser.password">
+        <input class = "input-custom" type = "password" placeholder = "confirm password" ng-model = "user.newUser.confPassword">
+        <div class = "row center">
+        <a ng-click = "user.createUser(user.newUser)" class = "btn waves-effect waves-blue purple purple-lighten-1"> Create </a>
+        </div>
+      </div>
+    </div>
+    <div class = "main-content container center">
+      <div ng-show = "user.hide" class = "row">
+        <h2 class = "col s12 grey lighten-1 grey-text text-darken-3"> Welcome to TaskVerse </h2>
+        <h4 class = "purple-text text-lighten-1 grey lighten-1"> Hello {{ user.currentUser.userName }}, you have 0 tasks </h4>
+      </div>
+      <div ng-show = "user.hide" class = "row">
+        <div class = "col s12 m4 l3 main-nav grey lighten-1">
+          <ul class = "">
+            <li class = "purple darken-1"><a href = "#/projects"><h5 class = "grey-text text-lighten-3 nav-item"> Projects </h5></a></li>
+            <li class = "purple darken-2"><a href = "#/assigned_tasks"><h5 class = "grey-text text-lighten-3 nav-item"> Assigned Tasks </h5></a></li>
+            <li class = "purple darken-3"><a href = "#/chat"><h5 class = "grey-text text-lighten-3 nav-item"> Chat </h5><a/></li>
+            <li class = "purple darken-4"><a href = "#/download"><h5 class = "grey-text text-lighten-3 nav-item"> Download </h5><a/></li>
+            <li class = "purple darken-1"><a href = "#/all_users"><h5 class = "grey-text text-lighten-3 nav-item"> All Users </h5><a/></li>
+          </ul>
+        </div>
+        <div ng-show = "user.hide"  class = "col s12 m8 l9" ng-view ="">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

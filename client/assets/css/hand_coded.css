@@ -1,0 +1,14 @@
+.main-nav {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Hide main content once angular is up and running. */
+
+/*.main-content {
+  display: none
+}*/
+
+.create-link {
+  margin-top: 20px;
+}

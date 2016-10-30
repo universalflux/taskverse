@@ -1,0 +1,13 @@
+<div ng-controller = "ProjectsController as project">
+  <h3> Current Projects </h3>  <a class = "btn blue white-text" ng-click = "project.createProject(project.newProject)"> Create </a>
+
+  <input type = "text" ng-model = "project.newProject.name" placeholder = "create a new project">
+
+  <ul ng-repeat = "listItem in project.projects">
+    <li> <h4 class = "purple-text text-lighten-3"> {{ listItem.name }} </h4>
+    <a ng-if = "listItem.name" class = "btn color red white-text"> Remove </a>
+    <a ng-if = "listItem.name" class = "btn color green white-text"> Add Task </a>
+    <a ng-if = "listItem.name" class = "btn color purple darken-4 white-text"> Assign </a>
+    </li>
+  </ul>
+</div>
