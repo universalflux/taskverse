@@ -8,7 +8,6 @@ var UserSchema = new Schema({
   userName: String,
   password: String,
   token: String,
-  _tasks: [{type:Schema.Types.ObjectId, ref:'Task'}],
   _projects: [{type:Schema.Types.ObjectId, ref:'Project'}]
 });
 

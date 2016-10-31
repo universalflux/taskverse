@@ -14,7 +14,11 @@ taskverse.config(function($routeProvider){
     templateUrl: 'partials/chat.html'
   })
   .when('/projects', {
-    templateUrl: 'partials/projects.html'
+    templateUrl: 'partials/projects.html',
+    controller: 'ProjectsController'
+  })
+  .when('/project', {
+    templateUrl: 'partials/project.html'
   })
   .when('/download', {
     templateUrl:'partials/download.html'
@@ -142,36 +146,76 @@ taskverse.controller('UsersController', function($route, $location, UserService)
 taskverse.service('ProjectService', function($http){
   let service = {};
   let projects = [];
+  let currentProject = {};
 
+  service.getAll = (callback) => {
+    $http.get('/get_all').then((data) => {
+      projects = data.data;
+      callback(projects);
+    });
+  }
   service.createProject = (data, callback) => {
-    console.log(data.name + " has made it to the service.");
-    projects.push(data);
-    callback(data);
+    console.log(data + " has made it to the service.");
+    console.log(data);
+    $http.post('/project', data).then((data) => {
+      console.log(data.data);
+      projects = data.data;
+      callback(projects);
+    });
   };
 
-  service.grabProject = (callback) => {
+
+  service.grabProjects = (callback) => {
     callback(projects);
     return projects;
   };
+
+  service.getProject = (incoming, callback) => {
+    console.log(incoming);
+    $http.post('/one_project', incoming).then((data) => {
+      currentProject = data.data;
+      callback(currentProject);
+    });
+  }
+
+  service.grabProject = (callback) => {
+    callback(currentProject);
+  };
+
+
   return service;
 });
 
 // Project Controller
 taskverse.controller('ProjectsController', function(ProjectService, UserService, $location){
-  const vm = this;
+  let vm = this;
 
-  vm.grabProject = (() => {
-    ProjectService.grabProject((data) => {
+  vm.grabProjects = () => {
+    ProjectService.grabProjects((data) => {
       vm.projects = data;
       console.log(data);
     })
-  });
-
-  vm.grabUser = () => {
-    UserService.grabUser((data) => {
-      vm.currentUser = data;
-    })
   };
+
+  ProjectService.getAll((data) => {
+    console.log(data + " has reached the view.");
+    vm.projects = data;
+    vm.grabProjects();
+  })
+
+  vm.grabProject = () => {
+    ProjectService.grabProject((data) => {
+      vm.currentProject = data;
+    });
+  }
+
+  vm.grabProject();
+
+  // vm.grabUser = () => {
+  //   UserService.grabUser((data) => {
+  //     vm.currentUser = data;
+  //   })
+  // };
 
   vm.createProject = (data) => {
     console.log(data.name + " has made it to the controller.");
@@ -179,9 +223,22 @@ taskverse.controller('ProjectsController', function(ProjectService, UserService,
       console.log(data.name + " has made it to the database and back to the controller")
       vm.projects = data;
       vm.newProject = {};
-      vm.grabProject();
+      vm.grabProjects();
     });
   };
+
+
+  vm.getProject = (data) => {
+    console.log(data + " here in the controller.");
+    ProjectService.getProject(data, (data) => {
+      console.log(data);
+      vm.currentProject = data;
+      vm.grabProject();
+      $location.path('/project');
+    });
+  };
+
+
 });
 
 //********** E N D  P R O J E C T  **********//

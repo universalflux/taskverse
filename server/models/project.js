@@ -4,8 +4,11 @@ var Schema = mongoose.Schema;
 var ProjectSchema = new Schema({
   name: String,
   summary: String,
-  tasks: [{type: Schema.Types.ObjectId, ref:'Task'}],
+  tasks: Array,
   _users: [{type: Schema.Types.ObjectId, ref:'User'}]
+},
+{
+  timestamps: true
 });
 
 mongoose.model('Project', ProjectSchema);

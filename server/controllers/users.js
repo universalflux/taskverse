@@ -28,7 +28,6 @@ module.exports = (() => {
                   firstName: freshUser.userName,
                   lastName: freshUser.lastName,
                   userName: freshUser.userName,
-                  _tasks: freshUser._tasks,
                   _projects: freshUser._projects,
                   token: freshUser.token
                 }
@@ -56,7 +55,6 @@ module.exports = (() => {
                 firstName: found.userName,
                 lastName: found.lastName,
                 userName: found.userName,
-                _tasks: found._tasks,
                 _projects: found._projects,
                 token: found.token
               };
@@ -86,7 +84,6 @@ module.exports = (() => {
                 firstName: cookieUser.userName,
                 lastName: cookieUser.lastName,
                 userName: cookieUser.userName,
-                _tasks: cookieUser._tasks,
                 _projects: cookieUser._projects,
                 token: cookieUser.token
               }

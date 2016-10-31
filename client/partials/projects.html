@@ -3,11 +3,9 @@
 
   <input type = "text" ng-model = "project.newProject.name" placeholder = "create a new project">
 
-  <ul ng-repeat = "listItem in project.projects">
+  <ul ng-repeat = "listItem in project.projects | orderBy : listItem.updatedAt">
     <li> <h4 class = "purple-text text-lighten-3"> {{ listItem.name }} </h4>
-    <a ng-if = "listItem.name" class = "btn color red white-text"> Remove </a>
-    <a ng-if = "listItem.name" class = "btn color green white-text"> Add Task </a>
-    <a ng-if = "listItem.name" class = "btn color purple darken-4 white-text"> Assign </a>
+    <a ng-if = "listItem.name" ng-click = "project.getProject(listItem)" class = "btn color green white-text"> Go </a>
     </li>
   </ul>
 </div>

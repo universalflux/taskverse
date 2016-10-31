@@ -4,6 +4,15 @@ var projects = require('./../controllers/projects.js');
 
 module.exports = (app, bcrypt, io, jwt, cookie) => {
   // routes go here.
+  app.get('/get_all', (req, res) => {
+    projects.getAll(req, res, bcrypt, jwt, cookie);
+  });
+  app.post('/one_project', (req, res) => {
+    projects.getOne(req, res, bcrypt, jwt, cookie);
+  });
+  app.post('/project', (req, res) => {
+    projects.create(req, res, bcrypt, jwt, cookie);
+  });
   app.post('/cookie_auth', (req, res) => {
     users.cookieAuth(req, res, bcrypt, jwt, cookie);
   });
